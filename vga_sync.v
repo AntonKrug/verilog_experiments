@@ -10,9 +10,7 @@ module vga_sync(clk, rst, hsync, vsync, displayOn, x, y);
     // using VESA 800x600 60Hz with 40MHz pixel clock
     // other resources:
     // https://tomverbeure.github.io/video_timings_calculator
-    // 320x200 x 60Hz 5Mhz 40,320,8,N32 (400) x 6,200,3,P6 (215)
-    // 320x240 x 60Hz 6Mhz 40,320,8,N32 (400) x 6,240,3,P4 (253)
-    // 160x100 x 60Hz 1Mhz 16,160,8,N8  (192) x 6,100,3,P6 (115)
+    // https://projectf.io/posts/video-timings-vga-720p-1080p
 
     localparam H_BACK    = 88;
     localparam H_DISPLAY = 800;
