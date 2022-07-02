@@ -1,0 +1,10 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/fredy/projects/vga-003'
+icepll -i 100M -o 40M -m -p -f pll.v
+ 
+yosys -p 'synth_ice40 -top top -blif build/icezero.blif' top.v  | tee log/synth.txt
+arachne-pnr -d 8k -P tq144:4k -p icezero.pcf -o build/icezero.asc build/icezero.blif | tee log/pnr.txt
+icetime -d hx8k -c 50 build/icezero.asc
+icepack build/icezero.asc build/icezero.bin
+make: Leaving directory '/home/fredy/projects/vga-003'
+ 

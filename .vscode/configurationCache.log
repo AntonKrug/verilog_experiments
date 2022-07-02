@@ -1,0 +1,1 @@
+{"buildTargets":["all","build/icezero.asc","build/icezero.bin","build/icezero.blif","clean","pll","pll.v","prog","reset"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}
