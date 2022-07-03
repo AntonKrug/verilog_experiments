@@ -29,7 +29,7 @@ set_io j1[4] 116
 # J3 FTDI connector, for a cheap USB FTDI adapter
 # careful, the VCC is 5V but the IO must be 3.3V!
 # a mod of the FTDI adapter might be necesarry
-# https://www.ebay.ie/itm/182762889906?hash=item2a8d8462b2:g:A8YAAOSwGNthLJUy&amdata=enc%3AAQAHAAAA4NqYC3KYtOghC4PKr%2BAoQvIO%2F9Kfh4GC8HScvJVXWASW8evwFENE4u5qnAMmIaZuczwTQYu8Y3Vguzlkxm%2B1buYTGLAD4ifIa%2Fa27eXXAhYaPA2NiG7wf%2FgKqTT6wiNOWK%2FnlpZLyZVjJOMiV2nPxQEonsRkfVa84mLM0RerNtGhqVcFe2pq2edy27Z9J37IqTZLc%2BAGDv4Zy7SfgQaJFpBhh51vt2foYX6VzxHdUhnkVSxTRVheT2GsV7YL0mEe%2BkOahJhP1wzsoH56ALdXMiqp%2FHpUltQoV%2FWrL3L9ZnCv%7Ctkp%3ABFBMwt67xbhg
+# https://www.ebay.ie/itm/182762889906
 # CTS output can be set to low while DTR input can be ignored
 set_io j3_cts 119
 set_io j3_tx 122
