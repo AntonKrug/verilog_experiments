@@ -14,7 +14,7 @@ module top (input clk_100mhz, output reg [2:0]led, output [7:0]p4);
 	resetGenerator myRst(.clk(clk), .pll_locked(pll_locked), .rst(rst));
 
 	// LED 1Hz blink
-	blinky myBlinky(.clk(clk), .rst(rst), .led(led[0]));
+	// blinky myBlinky(.clk(clk), .rst(rst), .led(led[0]));
 
 	// VGA
 	// https://www.servicesparepart.com/wp-content/uploads/2017/09/vga-db-15-pinout-schematic-diagram.jpg
