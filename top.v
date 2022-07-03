@@ -2,6 +2,7 @@
 `include "reset.v"
 `include "vga_sync.v"
 `include "blinky.v"
+`include "font.v"
 
 module top (input clk_100mhz, output reg [2:0]led, output [7:0]p4);
 
@@ -24,20 +25,18 @@ module top (input clk_100mhz, output reg [2:0]led, output [7:0]p4);
 	vga_sync myVgaSync(.clk(clk), .rst(rst), .hsync(hsync), .vsync(vsync), .displayOn(displayOn), .screenX(x), .screenY(y));
 
 	// Read small font ROM
-	reg [3:0] fontRom [0:15][0:7];
-	wire [3:0] fontLine;
-	wire fontPixel;
-
-	assign fontLine = fontRom[x[6:2]][y[2:0]];
-	assign fontPixel = fontLine[x[1:0]];
-
-	initial $readmemb("small_font.dat", fontRom);
+	wire [6:0] textX = x[8:2];  // 400 pix / 4pix font = 100 colums (7-bit value)
+	wire [5:0] textY = y[8:3];  // 300 pix / 8pix font = 37.5 rows = 37 rows (6-bit value)
+	wire [3:0] character = textX[3:0] + textY[3:0]; // select what character to display
+	wire pixel; // display black or white
+	wire displayText = 1; // when to render font and when not render anything
+	font myFont(.character(character), .x(x[1:0]), .y(y[2:0]), .pixel(pixel));
 
 	// Map VGA signals to PMOD adapter with VGA connector
 	assign p4[0] = hsync;
 	assign p4[1] = vsync;
-	assign p4[2] = fontPixel;
-	assign p4[4] = fontPixel;
-	assign p4[6] = fontPixel;
+	assign p4[2] = pixel & displayText;
+	assign p4[4] = pixel & displayText;
+	assign p4[6] = pixel & displayText;
 
 endmodule
