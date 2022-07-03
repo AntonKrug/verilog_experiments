@@ -23,12 +23,21 @@ module top (input clk_100mhz, output reg [2:0]led, output [7:0]p4);
 	wire [9:0]y;
 	vga_sync myVgaSync(.clk(clk), .rst(rst), .hsync(hsync), .vsync(vsync), .displayOn(displayOn), .x(x), .y(y));
 
+	// Read small font ROM
+	reg [3:0] fontRom [0:15][0:7];
+	wire [3:0] fontLine;
+	wire fontPixel;
+
+	assign fontLine = fontRom[x[7:3]][y[3:1]];
+	assign fontPixel = fontLine[x[2:1]];
+
+	initial $readmemb("small_font.dat", fontRom);
+
 	// Map VGA signals to PMOD adapter with VGA connector
 	assign p4[0] = hsync;
 	assign p4[1] = vsync;
-	assign p4[2] = displayOn && y[5];                             // Blue
-	assign p4[4] = displayOn && ( ((x&7) == 0) || ((y&7)==0) );   // Green
-	assign p4[6] = displayOn && x[5];                             // Red
-
+	assign p4[2] = fontPixel;
+	assign p4[4] = fontPixel;
+	assign p4[6] = fontPixel;
 
 endmodule

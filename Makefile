@@ -11,7 +11,7 @@ reset:
 pll.v: 
 	icepll -i 100M -o 40M -m -p -f pll.v
 
-build/icezero.blif: top.v pll.v blinky.v vga_sync.v reset.v
+build/icezero.blif: top.v pll.v blinky.v vga_sync.v reset.v small_font.dat
 	yosys -p 'synth_ice40 -top top -blif build/icezero.blif -json build/icezero.json' top.v  | tee log/synth.txt
 
 build/icezero.asc: build/icezero.blif icezero.pcf
