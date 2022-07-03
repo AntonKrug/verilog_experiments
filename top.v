@@ -29,7 +29,7 @@ module top (input clk_100mhz, output reg [2:0]led, output [7:0]p4);
 	wire [5:0] textY = y[8:3];  // 300 pix / 8pix font = 37.5 rows = 37 rows (6-bit value)
 	wire [3:0] character = textX[3:0] + textY[3:0]; // select what character to display
 	wire pixel; // display black or white
-	wire displayText = 1; // when to render font and when not render anything
+	wire displayText = textX>5 && textX<35 && textY>10 && textY<20; // when to render font and when not render anything
 	font myFont(.character(character), .x(x[1:0]), .y(y[2:0]), .pixel(pixel));
 
 	// Map VGA signals to PMOD adapter with VGA connector
