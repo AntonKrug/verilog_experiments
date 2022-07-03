@@ -19,17 +19,17 @@ module top (input clk_100mhz, output reg [2:0]led, output [7:0]p4);
 	// VGA
 	// https://www.servicesparepart.com/wp-content/uploads/2017/09/vga-db-15-pinout-schematic-diagram.jpg
 	wire hsync,vsync,displayOn;
-	wire [10:0]x;
-	wire [9:0]y;
-	vga_sync myVgaSync(.clk(clk), .rst(rst), .hsync(hsync), .vsync(vsync), .displayOn(displayOn), .x(x), .y(y));
+	wire [9:0]x;
+	wire [8:0]y;
+	vga_sync myVgaSync(.clk(clk), .rst(rst), .hsync(hsync), .vsync(vsync), .displayOn(displayOn), .screenX(x), .screenY(y));
 
 	// Read small font ROM
 	reg [3:0] fontRom [0:15][0:7];
 	wire [3:0] fontLine;
 	wire fontPixel;
 
-	assign fontLine = fontRom[x[7:3]][y[3:1]];
-	assign fontPixel = fontLine[x[2:1]];
+	assign fontLine = fontRom[x[6:2]][y[2:0]];
+	assign fontPixel = fontLine[x[1:0]];
 
 	initial $readmemb("small_font.dat", fontRom);
 

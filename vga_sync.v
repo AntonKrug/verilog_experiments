@@ -1,10 +1,17 @@
-module vga_sync(clk, rst, hsync, vsync, displayOn, x, y);
+module vga_sync(clk, rst, hsync, vsync, displayOn, screenX, screenY);
     input clk;
     input rst;
     output reg hsync, vsync;
     output displayOn;
-    output reg [10:0] x;
-    output reg [9:0] y;
+    output [9:0] screenX;
+    output [8:0] screenY;
+    
+    reg [10:0] x;
+    reg [9:0] y;
+
+    // Output X and Y at half of the resolution of the internal registers
+    assign screenX=x[10:1];
+    assign screenY=y[9:1];
 
     // https://www.epanorama.net/faq/vga2rgb/calc.html
     // using VESA 800x600 60Hz with 40MHz pixel clock
