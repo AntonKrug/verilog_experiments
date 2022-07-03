@@ -24,7 +24,8 @@ build/icezero.bin: build/icezero.asc
 	icepack build/icezero.asc build/icezero.bin
 
 clean:
-	rm -f build/icezero.blif build/icezero.asc build/icezero.bin
+	rm -f build/icezero.blif build/icezero.json 
+	rm -f build/icezero.asc build/icezero.bin
 	rm -f pll.v
 
 .PHONY: all prog reset clean
